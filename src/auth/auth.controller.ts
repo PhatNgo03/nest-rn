@@ -26,7 +26,7 @@ export class AuthController {
     return this.authService.handleRegister(registerDto);
   }
 
-  @Get('Gmail')
+  @Get('gmail')
   @Public()
   testGmail() {
     this.mailerService
@@ -35,7 +35,11 @@ export class AuthController {
         // from: 'noreply@nestjs.com', // sender address
         subject: 'Testing Nest MailerModule ✔', // Subject line
         text: 'welcome', // plaintext body
-        html: '<b>hello world with pat</b>', // HTML body content
+        template: "register.hbs",
+        context: {
+          name: "Phat Ngo",
+          activationCode: 123456789
+        }
       })
       .then(() => { })
       .catch(() => { });

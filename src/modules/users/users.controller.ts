@@ -11,10 +11,13 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Public } from 'src/decorator/customizeGuard';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {
+
+  }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -22,6 +25,7 @@ export class UsersController {
   }
 
   @Get()
+  @Public() //check guard
   async findAll(
     @Query() query: string,
     @Query("current") current: string,
